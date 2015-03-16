@@ -44,21 +44,23 @@ class PlaylistGenerator(object):
         '''
         
         ttv2yandex = []
+
+        
+        ttv2yFile = open('/etc/aceproxy/plugins/ttv2y.txt', 'r')
+        ttv2ylines = ttv2yFile.readlines()
+
+	for line in ttv2ylines:
+    	    ttv2yandex_item = line.strip().split(";")
+    	    ttv2yandex.append(ttv2yandex_item)
         
         if not empty_header:
             itemlist = PlaylistGenerator.m3uheader
         else:
             itemlist = PlaylistGenerator.m3uemptyheader
+
         if add_ts:
                 # Adding ts:// after http:// for some players
                 hostport = 'ts://' + hostport
-        
-                ttv2yFile = open('/etc/aceproxy/plugins/ttv2y.txt', 'r')
-                ttv2ylines = ttv2yFile.readlines()
-
-		for line in ttv2ylines:
-            	    ttv2yandex_item = line.strip().split(";")
-                    ttv2yandex.append(ttv2yandex_item)
 
         for item in self.itemlist:
             item['tvg'] = item.get('tvg', '') if item.get('tvg') else \
@@ -67,7 +69,7 @@ class PlaylistGenerator(object):
             for convert_items in ttv2yandex:
         	if convert_items[0] == item.get('name'):
 		    item['tvg'] = " ".join(str(tmp_str_ttv2y) for tmp_str_ttv2y in convert_items[-1:])
-    		break
+    		    break
 
             # For .acelive and .torrent
             item['url'] = re.sub('^(http.+)$', lambda match: 'http://' + hostport + '/torrent/' + \
