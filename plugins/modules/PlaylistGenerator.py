@@ -13,7 +13,7 @@ class PlaylistGenerator(object):
     m3uemptyheader = '#EXTM3U\n'
     m3uchanneltemplate = \
         '#EXTINF:-1 group-title="%s" tvg-name="%s" tvg-logo="%s",%s\n%s\n'
-
+    
     def __init__(self):
         self.itemlist = list()
 
@@ -42,6 +42,9 @@ class PlaylistGenerator(object):
         '''
         Exports m3u playlist
         '''
+        
+        ttv2yandex = []
+        
         if not empty_header:
             itemlist = PlaylistGenerator.m3uheader
         else:
@@ -49,10 +52,23 @@ class PlaylistGenerator(object):
         if add_ts:
                 # Adding ts:// after http:// for some players
                 hostport = 'ts://' + hostport
+        
+                ttv2yFile = open('/etc/aceproxy/plugins/ttv2y.txt', 'r')
+                ttv2ylines = ttv2yFile.readlines()
+
+		for line in ttv2ylines:
+            	    ttv2yandex_item = line.strip().split(";")
+                    ttv2yandex.append(ttv2yandex_item)
 
         for item in self.itemlist:
             item['tvg'] = item.get('tvg', '') if item.get('tvg') else \
                 item.get('name').replace(' ', '_')
+
+            for convert_items in ttv2yandex:
+        	if convert_items[0] == item.get('name'):
+		    item['tvg'] = " ".join(str(tmp_str_ttv2y) for tmp_str_ttv2y in convert_items[-1:])
+    		break
+
             # For .acelive and .torrent
             item['url'] = re.sub('^(http.+)$', lambda match: 'http://' + hostport + '/torrent/' + \
                              urllib2.quote(match.group(0), '') + '/stream.mp4', item['url'],

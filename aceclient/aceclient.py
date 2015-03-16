@@ -220,9 +220,7 @@ class AceClient(object):
                         try:
                             self._write(AceMessage.request.READY_key(
                                 self._request_key, self._product_key))
-                        except urllib2.URLError as e:
-                            logger.error("Can't connect to keygen server! " + \
-                                repr(e))
+                        except:
                             self._auth = False
                             self._authevent.set()
                         self._request_key = None

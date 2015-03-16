@@ -12,7 +12,7 @@ from aceclient.acemessages import AceConst
 class AceDefConfig(object):
     acespawn = False
     acecmd = "acestreamengine --client-console"
-    acekey = 'n51LvQoTlJzNGaFxseRK-uvnvX-sD4Vm5Axwmc4UcoD-jruxmKsuJaH0eVgE'
+    acekey = ''
     acehost = '127.0.0.1'
     aceport = 62062
     aceage = AceConst.AGE_18_24

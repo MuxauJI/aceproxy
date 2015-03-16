@@ -20,7 +20,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     acecmd = "acestreamengine --client-console"
     # Ace Stream API key
     # You probably shouldn't touch this
-    acekey = 'n51LvQoTlJzNGaFxseRK-uvnvX-sD4Vm5Axwmc4UcoD-jruxmKsuJaH0eVgE'
+    acekey = ''
     # Ace Stream Engine host
     # Change this if you use remote Ace Stream Engine
     # Remember that by default Ace Stream Engine listens only

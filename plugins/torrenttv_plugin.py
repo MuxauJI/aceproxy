@@ -36,10 +36,10 @@ class Torrenttv(AceProxyPlugin):
             Torrenttv.logger.debug('Trying to download playlist')
             req = urllib2.Request(config.url, headers={'User-Agent' : "Magic Browser"})
             Torrenttv.playlist = urllib2.urlopen(
-                req, timeout=10).read()
+                req, timeout=30).read()
             Torrenttv.playlisttime = int(time.time())
-        except:
-            Torrenttv.logger.error("Can't download playlist!")
+        except Exception as e:
+    	    Torrenttv.logger.error("Can't download playlist! Error: " + repr(e))
             return False
 
         return True
