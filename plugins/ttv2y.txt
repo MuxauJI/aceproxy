@@ -109,7 +109,7 @@ Amedia 2;918
 Amedia Premium HD;1372
 Amedia Premium HD (SD);1372
 CBS Drama;911
-Enter Film;http://m.tv.yandex.by/187/channels/281
+Enter Film;http://m.tv.yandex.ru/187/channels/1547
 Fox;659
 Fox Life;615
 HD Кино;987
@@ -283,3 +283,8 @@ Outdoor Channel;322
 Страшное HD;1377
 Fox HD;1031
 Fox Life HD;464
+AMC;608
+Кино ТВ;1037
+НТВ HD;162
+Русский детектив;1570
+РEН  ТВ;18

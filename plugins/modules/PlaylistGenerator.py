@@ -3,6 +3,7 @@ Playlist Generator
 This module can generate .m3u playlists with tv guide
 and groups
 '''
+
 import re
 import urllib2
 
@@ -42,17 +43,17 @@ class PlaylistGenerator(object):
         '''
         Exports m3u playlist
         '''
-        
-        ttv2yandex = []
 
-        
-        ttv2yFile = open('/etc/aceproxy/plugins/ttv2y.txt', 'r')
+        ttv2yFile = open('/etc/aceproxy/plugins/ttv2y.txt', "r")
         ttv2ylines = ttv2yFile.readlines()
+        ttv2yFile.close()
+
+	ttv2yandex = []
 
 	for line in ttv2ylines:
     	    ttv2yandex_item = line.strip().split(";")
     	    ttv2yandex.append(ttv2yandex_item)
-        
+    	
         if not empty_header:
             itemlist = PlaylistGenerator.m3uheader
         else:
@@ -67,7 +68,7 @@ class PlaylistGenerator(object):
                 item.get('name').replace(' ', '_')
 
             for convert_items in ttv2yandex:
-        	if convert_items[0] == item.get('name'):
+        	if convert_items[0].decode('utf-8') == item.get('name').decode('utf-8'):
 		    item['tvg'] = " ".join(str(tmp_str_ttv2y) for tmp_str_ttv2y in convert_items[-1:])
     		    break
 
