@@ -3,10 +3,9 @@ Torrent-tv.ru Playlist Downloader Plugin configuration file
 '''
 
 # Insert your Torrent-tv.ru playlist URL here
-url = ''
+url = 'http://127.0.0.1/playlist.m3u'
 
-# Download playlist every N minutes to prevent
-# torrent-tv tracker forgetting us.
+# Cached playlist live period in minutes
 #
-# 0 = disabled
-updateevery = 0
+# 0 = forever (Playlist downloaded at start stay in cache forever)
+plttl = 10

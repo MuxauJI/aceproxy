@@ -22,14 +22,7 @@ class Torrenttv(AceProxyPlugin):
     playlisttime = None
 
     def __init__(self, AceConfig, AceStuff):
-        if config.updateevery:
-            self.downloadPlaylist()
-            gevent.spawn(self.playlistTimedDownloader)
-
-    def playlistTimedDownloader(self):
-        while True:
-            gevent.sleep(config.updateevery * 60)
-            self.downloadPlaylist()
+        self.downloadPlaylist()
 
     def downloadPlaylist(self):
         try:
@@ -39,14 +32,13 @@ class Torrenttv(AceProxyPlugin):
                 req, timeout=30).read()
             Torrenttv.playlisttime = int(time.time())
         except Exception as e:
-    	    Torrenttv.logger.error("Can't download playlist! Error: " + repr(e))
+	    Torrenttv.logger.error("Can't download playlist! Error: " + repr(e))
             return False
 
         return True
 
     def handle(self, connection):
-        # 30 minutes cache
-        if not Torrenttv.playlist or (int(time.time()) - Torrenttv.playlisttime > 30 * 60):
+        if config.plttl != 0 and (not Torrenttv.playlist or (int(time.time()) - Torrenttv.playlisttime > config.plttl * 60)):
             if not self.downloadPlaylist():
                 connection.dieWithError()
                 return
@@ -60,14 +52,13 @@ class Torrenttv(AceProxyPlugin):
         # Match playlist with regexp
         matches = re.finditer(r',(?P<name>\S.+) \((?P<group>.+)\)\n(?P<url>^.+$)',
                               Torrenttv.playlist, re.MULTILINE)
-        
+
         add_ts = False
         try:
             if connection.splittedpath[2].lower() == 'ts':
                 add_ts = True
         except:
             pass
-                
 
         playlistgen = PlaylistGenerator()
         for match in matches:
