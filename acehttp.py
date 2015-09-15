@@ -236,7 +236,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.closeConnection()
             return
 
-        self.path_unquoted = urllib2.unquote(self.splittedpath[2])
+        self.path_unquoted = urllib2.unquote(self.splittedpath[2] + "//" + self.splittedpath[4] + "/" + self.splittedpath[5] + "/" + self.splittedpath[6] + "/" + self.splittedpath[7])
         # Make list with parameters
         self.params = list()
         for i in xrange(3, 8):
