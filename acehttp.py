@@ -237,6 +237,11 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             return
 
         self.path_unquoted = urllib2.unquote(self.splittedpath[2])
+        if not self.path_unquoted.strip():
+	    logger.error("Bad torrent URL specified!")
+            self.dieWithError(400)  # 400 Bad Request
+            return
+
         # Make list with parameters
         self.params = list()
         for i in xrange(3, 8):

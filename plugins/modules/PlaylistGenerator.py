@@ -74,19 +74,11 @@ class PlaylistGenerator(object):
 
             # For .acelive and .torrent
             item['url'] = re.sub('^(http.+)$', lambda match: 'http://' + hostport + '/torrent/' + \
-                             urllib2.quote(match.group(0), '') + '/stream.mp4', item['url'],
+                             urllib2.quote(match.group(0), '') + '/stream.avi', item['url'],
                                    flags=re.MULTILINE)
             # For PIDs
-            item['url'] = re.sub('^(acestream://)?(?P<pid>[0-9a-f]{40})$', 'http://' + hostport + '/pid/\\g<pid>/stream.mp4',
+            item['url'] = re.sub('^(acestream://)?(?P<pid>[0-9a-f]{40})$', 'http://' + hostport + '/pid/\\g<pid>/stream.avi',
                                     item['url'], flags=re.MULTILINE)
-
-            # For channel id's
-            if archive:
-                item['url'] = re.sub('^([0-9]+)$', lambda match: 'http://' + hostport + '/archive/play?id=' + match.group(0),
-                                    item['url'], flags=re.MULTILINE)
-            else:
-                item['url'] = re.sub('^([0-9]+)$', lambda match: 'http://' + hostport + '/channels/play?id=' + match.group(0),
-                                        item['url'], flags=re.MULTILINE)
 
             itemlist += PlaylistGenerator._generatem3uline(item)
 
