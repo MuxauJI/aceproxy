@@ -176,10 +176,11 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     self.dieWithError(403)  # 403 Forbidden
                     return
 
-        logger.info("Accepted connection from " + self.clientip + " path " + self.path)
+        self.nowhitespacespath = "".join(self.path.split())
+        logger.info("Accepted connection from " + self.clientip + " path " + self.nowhitespacespath)
 
         try:
-            self.splittedpath = self.path.split('/')
+            self.splittedpath = self.nowhitespacespath.split('/')
             self.reqtype = self.splittedpath[1].lower()
             # If first parameter is 'pid' or 'torrent' or it should be handled
             # by plugin
@@ -209,7 +210,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         #                      |_________|
         # And if it ends with regular video extension
         try:
-            if not self.path.endswith(('.3gp', '.avi', '.flv', '.mkv', '.mov', '.mp4', '.mpeg', '.mpg', '.ogv', '.ts')):
+            if not self.nowhitespacespath.endswith(('.3gp', '.avi', '.flv', '.mkv', '.mov', '.mp4', '.mpeg', '.mpg', '.ogv', '.ts')):
                 logger.error("Request seems like valid but no valid video extension was provided")
                 self.dieWithError(400)
                 return
