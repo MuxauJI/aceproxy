@@ -102,15 +102,15 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         self.vlcstate = True
 
                     if not self.streamstate and self.vlcstate:
-                        if self.vlcstate:
-                            AceStuff.vlcclient.pauseBroadcast(self.vlcid)
-                            self.vlcstate = False
+                        AceStuff.vlcclient.pauseBroadcast(self.vlcid)
+                        self.vlcstate = False
 
                 if not self.clientconnected:
                     logger.debug("Client is not connected, terminating")
                     break
 
                 data = self.video.read(4096)
+
                 if data and self.clientconnected:
                     self.wfile.write(data)
                 else:
