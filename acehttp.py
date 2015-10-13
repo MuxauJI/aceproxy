@@ -5,12 +5,13 @@ AceProxy: Ace Stream to HTTP Proxy
 
 Website: https://github.com/ValdikSS/AceProxy
 '''
-import traceback
-import gevent
 import gevent.monkey
-# Monkeypatching and all the stuff
 
+# Monkeypatching and all the stuff
 gevent.monkey.patch_all()
+
+import gevent
+import traceback
 import glob
 import os
 import signal
