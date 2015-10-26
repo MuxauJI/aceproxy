@@ -97,7 +97,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     # flag is not set), pause the stream if AceEngine says so and
                     # we should obey it.
                     # A bit ugly, huh?
-                    self.streamstate = self.ace.getPlayEvent(0.5)
+                    self.streamstate = self.ace.getPlayEvent(1.0)
                     if self.streamstate and not self.vlcstate:
                         AceStuff.vlcclient.playBroadcast(self.vlcid)
                         self.vlcstate = True
