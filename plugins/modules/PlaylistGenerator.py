@@ -10,10 +10,10 @@ import urllib2
 class PlaylistGenerator(object):
 
     m3uheader = \
-        '#EXTM3U url-tvg="http://www.teleguide.info/download/new3/jtv.zip"\n'
+        '#EXTM3U\n'
     m3uemptyheader = '#EXTM3U\n'
     m3uchanneltemplate = \
-        '#EXTINF:-1 group-title="%s" tvg-name="%s" tvg-logo="%s",%s\n%s\n'
+        '#EXTINF:0 group-title="%s" tvg-name="%s" tvg-logo="%s",%s\n%s\n'
     
     def __init__(self):
         self.itemlist = list()
