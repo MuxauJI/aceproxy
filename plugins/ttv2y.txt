@@ -288,3 +288,11 @@ AMC;608
 НТВ HD;162
 Русский детектив;1570
 РEН  ТВ;18
+Paramount Comedy HD;920
+Драйв ТВ;505
+Animаl Planеt HD;990
+Discovеry Sciеnce;409
+Discovеry Channеl HD;325
+Discovеry Wоrld;437
+Наше любимое кино;477
+Viasat Nature-History HD;765
