@@ -53,7 +53,6 @@ class PlaylistGenerator(object):
 			ttv2yandex_item = line.strip().split(";")
 			ttv2yandex.append(ttv2yandex_item)
 	
-
         if header is None:
             if not empty_header:
                 itemlist = PlaylistGenerator.m3uheader
