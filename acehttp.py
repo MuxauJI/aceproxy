@@ -172,10 +172,10 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
             if (AceConfig.firewallblacklistmode and self.clientinrange) or \
                 (not AceConfig.firewallblacklistmode and not self.clientinrange):
-                    logger.info('Dropping connection from ' + self.clientip + ' due to ' + \
-                                'firewall rules')
-                    self.dieWithError(403)  # 403 Forbidden
-                    return
+                logger.info('Dropping connection from ' + self.clientip + ' due to ' + \
+                            'firewall rules')
+                self.dieWithError(403)  # 403 Forbidden
+                return
 
         self.nowhitespacespath = "".join(self.path.split())
         logger.info("Accepted connection from " + self.clientip + " path " + self.nowhitespacespath)
@@ -240,7 +240,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
         self.path_unquoted = urllib2.unquote(self.splittedpath[2])
         if not self.path_unquoted.strip():
-	    logger.error("Bad torrent URL specified!")
+            logger.error("Bad torrent URL specified!")
             self.dieWithError(400)  # 400 Bad Request
             return
 
@@ -719,7 +719,7 @@ try:
     logger.info("Using gevent %s" % gevent.__version__)
     logger.info("Using psutil %s" % psutil.__version__)
     if AceConfig.vlcuse:
-         logger.info("Using VLC %s" % AceStuff.vlcclient._vlcver)
+        logger.info("Using VLC %s" % AceStuff.vlcclient._vlcver)
     logger.info("Server started.")
     while True:
         if AceConfig.vlcuse and AceConfig.vlcspawn:
