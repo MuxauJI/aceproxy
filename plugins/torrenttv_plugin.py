@@ -32,7 +32,7 @@ class Torrenttv(AceProxyPlugin):
                 req, timeout=30).read()
             Torrenttv.playlisttime = int(time.time())
         except Exception as e:
-	    Torrenttv.logger.error("Can't download playlist! Error: " + repr(e))
+            Torrenttv.logger.error("Can't download playlist! Error: " + repr(e))
             return False
 
         return True
@@ -66,7 +66,7 @@ class Torrenttv(AceProxyPlugin):
             name = itemdict.get('name').decode('UTF-8')
             logo = config.logomap.get(name)
             if logo is not None:
-                 itemdict['logo'] = logo
+                itemdict['logo'] = logo
             playlistgen.addItem(itemdict)
 
         header = '#EXTM3U url-tvg="%s" tvg-shift=%d\n' %(config.tvgurl, config.tvgshift)

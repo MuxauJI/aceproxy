@@ -47,21 +47,21 @@ class PlaylistGenerator(object):
         ttv2ylines = ttv2yFile.readlines()
         ttv2yFile.close()
 
-	ttv2yandex = []
+        ttv2yandex = []
 
-	for line in ttv2ylines:
-	    ttv2yandex_item = line.strip().split(";")
-	    ttv2yandex.append(ttv2yandex_item)
-	
+        for line in ttv2ylines:
+            ttv2yandex_item = line.strip().split(";")
+            ttv2yandex.append(ttv2yandex_item)
+
         if header is None:
             if not empty_header:
                 itemlist = PlaylistGenerator.m3uheader
             else:
-		itemlist = PlaylistGenerator.m3uemptyheader
+                itemlist = PlaylistGenerator.m3uemptyheader
         else:
-	    itemlist = header
+            itemlist = header
 
-	if add_ts:
+        if add_ts:
             # Adding ts:// after http:// for some players
             hostport = 'ts://' + hostport
 
@@ -70,9 +70,9 @@ class PlaylistGenerator(object):
                 item.get('name').replace(' ', '_')
 
             for convert_items in ttv2yandex:
-		if convert_items[0].decode('utf-8') == item.get('tvg').decode('utf-8'):
-		    item['tvg'] = " ".join(str(tmp_str_ttv2y) for tmp_str_ttv2y in convert_items[-1:])
-		    break
+                if convert_items[0].decode('utf-8') == item.get('tvg').decode('utf-8'):
+                    item['tvg'] = " ".join(str(tmp_str_ttv2y) for tmp_str_ttv2y in convert_items[-1:])
+                    break
 
             # For .acelive and .torrent
             item['url'] = re.sub('^(http.+)$', lambda match: 'http://' + hostport + '/torrent/' + \
@@ -84,10 +84,10 @@ class PlaylistGenerator(object):
             # For channel id's
             if archive:
                 item['url'] = re.sub('^([0-9]+)$', lambda match: 'http://' + hostport + '/archive/play?id=' + match.group(0),
-									item['url'], flags=re.MULTILINE)
+                                                                        item['url'], flags=re.MULTILINE)
             else:
                 item['url'] = re.sub('^([0-9]+)$', lambda match: 'http://' + hostport + '/channels/play?id=' + match.group(0),
-                            	    item['url'], flags=re.MULTILINE)
+                                    item['url'], flags=re.MULTILINE)
 
             itemlist += PlaylistGenerator._generatem3uline(item)
 
