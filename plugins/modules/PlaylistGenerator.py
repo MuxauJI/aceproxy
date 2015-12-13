@@ -11,7 +11,7 @@ class PlaylistGenerator(object):
 
     m3uheader = '#EXTM3U url-tvg="http://www.teleguide.info/download/new3/jtv.zip"\n'
     m3uemptyheader = '#EXTM3U\n'
-    m3uchanneltemplate = '#EXTINF:0 group-title="%s" tvg-name="%s" tvg-id="%s" tvg-logo="%s",%s\n%s\n'
+    m3uchanneltemplate = '#EXTINF:0 group-title="%s" tvg-name="%s" tvg-logo="%s",%s\n%s\n'
 
     def __init__(self):
         self.itemlist = list()
@@ -23,7 +23,6 @@ class PlaylistGenerator(object):
             name - item name
             url - item URL
             tvg - item tvg name (optional)
-            tvgid - item tvg id (optional)
             group - item playlist group (optional)
             logo - item logo file name (optional)
         '''
@@ -35,23 +34,23 @@ class PlaylistGenerator(object):
         Generates EXTINF line with url
         '''
         return PlaylistGenerator.m3uchanneltemplate % (
-            item.get('group', ''), item.get('tvg', ''), item.get('tvgid', ''),
-            item.get('logo', ''), item.get('name'), item.get('url'))
+            item.get('group', ''), item.get('tvg', ''), item.get('logo', ''),
+            item.get('name'), item.get('url'))
 
     def exportm3u(self, hostport, add_ts=False, empty_header=False, archive=False, header=None):
         '''
         Exports m3u playlist
         '''
 
-        ttv2yFile = open('/etc/aceproxy/plugins/ttv2y.txt', "r")
-        ttv2ylines = ttv2yFile.readlines()
-        ttv2yFile.close()
+        ttv2teleguideFile = open('/etc/aceproxy/plugins/ttv2teleguide.txt', "r")
+        ttv2teleguidelines = ttv2teleguideFile.readlines()
+        ttv2teleguideFile.close()
 
-        ttv2yandex = []
+        ttv2teleguide = []
 
-        for line in ttv2ylines:
-            ttv2yandex_item = line.strip().split(";")
-            ttv2yandex.append(ttv2yandex_item)
+        for line in ttv2teleguidelines:
+            ttv2teleguide_item = line.strip().split(";")
+            ttv2teleguide.append(ttv2teleguide_item)
 
         if header is None:
             if not empty_header:
@@ -67,11 +66,11 @@ class PlaylistGenerator(object):
 
         for item in self.itemlist:
             item['tvg'] = item.get('tvg', '') if item.get('tvg') else \
-                item.get('name').replace(' ', '_')
+                          item.get('name')
 
-            for convert_items in ttv2yandex:
-                if convert_items[0].decode('utf-8') == item.get('tvg').decode('utf-8'):
-                    item['tvg'] = " ".join(str(tmp_str_ttv2y) for tmp_str_ttv2y in convert_items[-1:])
+            for convert_items in ttv2teleguide:
+                if convert_items[1].decode('utf-8').lower() == item.get('tvg').decode('utf-8').lower():
+                    item['tvg'] = "epg_url:nas.lc/tg/teleguide_noage.php?reg=40000&channel=" + convert_items[0]
                     break
 
             # For .acelive and .torrent
