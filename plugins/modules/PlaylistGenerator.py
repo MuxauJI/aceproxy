@@ -70,7 +70,7 @@ class PlaylistGenerator(object):
 
             for convert_items in ttv2teleguide:
                 if convert_items[1].decode('utf-8').lower() == item.get('tvg').decode('utf-8').lower():
-                    item['tvg'] = "epg_url:nas.lc/tg/teleguide_noage.php|40000|" + convert_items[0]
+                    item['tvg'] = "epg_url:http://nas.lc/tg/leleguide_noage.php|213|" + convert_items[0]
                     break
 
             # For .acelive and .torrent
