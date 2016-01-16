@@ -69,9 +69,7 @@ class PlaylistGenerator(object):
                           item.get('name')
 
             for convert_items in ttv2teleguide:
-				clean_conv_item = re.sub(r'\W+', '', convert_items[1])
-				clean_tvg_item = re.sub(r'\W+', '', item.get('tvg'))
-                if clean_conv_item.decode('utf-8').lower() == clean_tvg_item.decode('utf-8').lower():
+                if convert_items[1].decode('utf-8').lower() == item.get('tvg').decode('utf-8').lower():
                     item['tvg'] = convert_items[0]
                     break
 
