@@ -42,6 +42,7 @@ class PlaylistGenerator(object):
         Exports m3u playlist
         '''
 
+        is_converted = 'False'
         ttv2teleguideFile = open('/etc/aceproxy/plugins/ttv2teleguide.txt', "r")
         ttv2teleguidelines = ttv2teleguideFile.readlines()
         ttv2teleguideFile.close()
@@ -71,7 +72,14 @@ class PlaylistGenerator(object):
             for convert_items in ttv2teleguide:
                 if convert_items[1].decode('utf-8').lower() == item.get('tvg').decode('utf-8').lower():
                     item['tvg'] = convert_items[0]
+                    is_converted = 'True'
                     break
+
+            if is_converted == 'Flase':
+                for convert_items in ttv2teleguide:
+                    if item.get('tvg').decode('utf-8').lower() in convert_items[1].decode('utf-8').lower():
+                        item['tvg'] = convert_items[0]
+                        break
 
             # For .acelive and .torrent
             item['url'] = re.sub('^(http.+)$', lambda match: 'http://' + hostport + '/torrent/' + \
