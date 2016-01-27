@@ -70,14 +70,17 @@ class PlaylistGenerator(object):
                           item.get('name')
 
             for convert_items in ttv2teleguide:
-                if convert_items[1].decode('utf-8').lower() == item.get('tvg').decode('utf-8').lower():
+                if convert_items[1].decode('utf-8').lower().strip() == item.get('tvg').decode('utf-8').lower().strip():
                     item['tvg'] = convert_items[0]
                     is_converted = 'True'
                     break
 
-            if is_converted == 'Flase':
+            if is_converted == 'False':
                 for convert_items in ttv2teleguide:
-                    if item.get('tvg').decode('utf-8').lower() in convert_items[1].decode('utf-8').lower():
+                    if convert_items[1].decode('utf-8').lower().strip() in item.get('tvg').decode('utf-8').lower().strip():
+                        item['tvg'] = convert_items[0]
+                        break
+                    elif item.get('tvg').decode('utf-8').lower().strip() in convert_items[1].decode('utf-8').lower().strip():
                         item['tvg'] = convert_items[0]
                         break
 
