@@ -14,13 +14,13 @@ class AceConfig(acedefconfig.AceDefConfig):
     # ----------------------------------------------------
     #
     # Spawn Ace Stream Engine automatically
-    acespawn = False
+    acespawn = True
     # Ace Stream cmd line (use `--log-file filepath` to write log)
     # Autodetect for Windows
-    acecmd = "acestreamengine --client-console"
+    acecmd = "acestreamengine --client-console --live-buffer 400"
     # Ace Stream API key
     # You probably shouldn't touch this
-    acekey = ''
+    acekey = 'n51LvQoTlJzNGaFxseRK-uvnvX-sD4Vm5Axwmc4UcoD-jruxmKsuJaH0eVgE'
     # Ace Stream Engine host
     # Change this if you use remote Ace Stream Engine
     # Remember that by default Ace Stream Engine listens only
@@ -30,7 +30,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     aceport = 62062
     # Ace Stream age parameter (LT_13, 13_17, 18_24, 25_34, 35_44, 45_54,
     # 55_64, GT_65)
-    aceage = AceConst.AGE_18_24
+    aceage = AceConst.AGE_25_34
     # Ace Stream sex parameter (MALE or FEMALE)
     acesex = AceConst.SEX_MALE
     # Ace Stream Engine startup timeout
@@ -38,11 +38,11 @@ class AceConfig(acedefconfig.AceDefConfig):
     # Loading takes about ~10 seconds and we need to wait before taking port out of it
     # Set this to 0 if you don't use proxy at startup or don't need to wait
     # Only applies to Windows systems
-    acestartuptimeout = 10
+    acestartuptimeout = 15
     # Ace Stream Engine connection timeout
-    aceconntimeout = 5
+    aceconntimeout = 8
     # Ace Stream Engine authentication result timeout
-    aceresulttimeout = 10
+    aceresulttimeout = 15
     # Message level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     debug = logging.DEBUG
     #
@@ -85,7 +85,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     # To use this, you should install VLC first
     # And run it with:
     # vlc -I telnet --clock-jitter 0 --network-caching 500 --telnet-pass admin
-    vlcuse = False
+    vlcuse = True
     # Use AceStream player that comes with engine
     # If true than proxy will detect a path to ace_player.exe and ace_player.exe will be spawned
     # It also will not check if vlc.exe is running, it will watch over ace_player.exe process
@@ -95,17 +95,17 @@ class AceConfig(acedefconfig.AceDefConfig):
     # to point ace_player.exe, not vlc.exe!!!
     vlcuseaceplayer = False
     # Spawn VLC automaticaly
-    vlcspawn = False
+    vlcspawn = True
     # VLC cmd line (use `--file-logging --logfile=filepath` to write log)
     # Please use the full path to executable for Windows, for example - C:\\Program Files\\VideoLAN\\VLC\\vlc.exe
-    vlccmd = "vlc -I telnet --clock-jitter -1 --network-caching -1 --sout-mux-caching 2000 --telnet-password admin --telnet-port 4212"
+    vlccmd = "vlc -I dummy -I telnet --clock-synchro 0 --clock-jitter 0 --network-caching 200 --sout-mux-caching 2000 --sout-keep --rt-priority --no-color --no-interact --no-stats --no-reset-config --telnet-password admin --telnet-port 42124"
     # VLC spawn timeout
     # Adjust this if you get error 'Cannot spawn VLC!'
-    vlcspawntimeout = 5
+    vlcspawntimeout = 15
     # VLC host
     vlchost = '127.0.0.1'
     # VLC telnet interface port
-    vlcport = 4212
+    vlcport = 42124
     # VLC streaming port (you shouldn't set it in VLC itself)
     vlcoutport = 8081
     # VLC telnet interface password
@@ -127,19 +127,19 @@ class AceConfig(acedefconfig.AceDefConfig):
     # !!!
     # PLEASE set this to 0 if you use VLC
     # !!!
-    videodelay = 2
+    videodelay = 0
     # Obey PAUSE and RESUME commands from Engine
     # (stops sending data to client, should prevent annoying buffering)
     # !!!
     # PLEASE set this to False if you use VLC
     # !!!
-    videoobey = True
+    videoobey = False
     # Stream send delay after PAUSE/RESUME commands (works only if option
     # above is enabled)
     # !!!
     # PLEASE set this to 0 if you use VLC
     # !!!
-    videopausedelay = 2
+    videopausedelay = 0
     # Seek back feature.
     # Seeks stream back for specified amount of seconds.
     # Greatly helps fighing AceSteam lags, but introduces
@@ -151,7 +151,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     # In seconds.
     videodestroydelay = 3
     # Pre-buffering timeout. In seconds.
-    videotimeout = 40
+    videotimeout = 70
     #
     # Some video players (mostly STBs and Smart TVs) can generate dummy requests
     # to detect MIME-type or something before playing which Ace Stream handles badly.

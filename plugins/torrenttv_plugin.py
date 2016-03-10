@@ -22,7 +22,8 @@ class Torrenttv(AceProxyPlugin):
     playlisttime = None
 
     def __init__(self, AceConfig, AceStuff):
-        self.downloadPlaylist()
+        if config.url:
+            self.downloadPlaylist()
 
     def downloadPlaylist(self):
         try:
