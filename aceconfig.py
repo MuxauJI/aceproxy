@@ -101,7 +101,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     vlccmd = "vlc -I dummy -I telnet --clock-synchro 0 --clock-jitter 0 --network-caching 0 --sout-mux-caching 0 --sout-keep --rt-priority --no-color --no-interact --no-stats --no-reset-config --telnet-password admin --telnet-port 42121"
     # VLC spawn timeout
     # Adjust this if you get error 'Cannot spawn VLC!'
-    vlcspawntimeout = 10
+    vlcspawntimeout = 30
     # VLC host
     vlchost = '127.0.0.1'
     # VLC telnet interface port
