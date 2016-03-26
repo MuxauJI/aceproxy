@@ -288,10 +288,7 @@ class AceClient(object):
                     self._position_last = self._position[2].split('=')[1]
                     self._position_buf = self._position[9].split('=')[1]
                     self._position = self._position[4].split('=')[1]
-                    logger.debug('Current position/last/buf: %s/%s/%s' % (self._position,
-                                                                          self._position_last,
-                                                                          self._position_buf)
-                    )
+                    # logger.debug('Current position/last/buf: %s/%s/%s' % (self._position, self._position_last, self._position_buf))
                     if self._seekback and not self._started_again:
                         self._write(AceMessage.request.SEEK(str(int(self._position_last) - \
                             self._seekback)))
@@ -307,7 +304,9 @@ class AceClient(object):
                         self._status = self._tempstatus
                         logger.debug("STATUS changed to " + self._status)
 
-                    if self._status == 'main:err':
+                    if self._status == 'main:dl' or self._status == 'main:prebuf' or self._status == 'main:buf':
+                        logger.debug("progress {1}% speed {5}kb/s peers {8}".format(*self._recvbuffer.split(';')))
+                    elif self._status == 'main:err':
                         logger.error(
                             self._status + ' with message ' + self._recvbuffer.split(';')[2])
                         self._result.set_exception(

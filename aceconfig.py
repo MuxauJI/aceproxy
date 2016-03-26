@@ -17,7 +17,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     acespawn = True
     # Ace Stream cmd line (use `--log-file filepath` to write log)
     # Autodetect for Windows
-    acecmd = "acestreamengine --client-console --live-buffer 400"
+    acecmd = "acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-cache-type memory --live-cache-size 102819600 --live-buffer 100"
     # Ace Stream API key
     # You probably shouldn't touch this
     acekey = 'n51LvQoTlJzNGaFxseRK-uvnvX-sD4Vm5Axwmc4UcoD-jruxmKsuJaH0eVgE'
@@ -30,7 +30,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     aceport = 62062
     # Ace Stream age parameter (LT_13, 13_17, 18_24, 25_34, 35_44, 45_54,
     # 55_64, GT_65)
-    aceage = AceConst.AGE_25_34
+    aceage = AceConst.AGE_18_24
     # Ace Stream sex parameter (MALE or FEMALE)
     acesex = AceConst.SEX_MALE
     # Ace Stream Engine startup timeout
@@ -40,9 +40,9 @@ class AceConfig(acedefconfig.AceDefConfig):
     # Only applies to Windows systems
     acestartuptimeout = 15
     # Ace Stream Engine connection timeout
-    aceconntimeout = 8
+    aceconntimeout = 15
     # Ace Stream Engine authentication result timeout
-    aceresulttimeout = 15
+    aceresulttimeout = 20
     # Message level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     debug = logging.DEBUG
     #
@@ -98,14 +98,14 @@ class AceConfig(acedefconfig.AceDefConfig):
     vlcspawn = True
     # VLC cmd line (use `--file-logging --logfile=filepath` to write log)
     # Please use the full path to executable for Windows, for example - C:\\Program Files\\VideoLAN\\VLC\\vlc.exe
-    vlccmd = "vlc -I dummy -I telnet --clock-synchro 0 --clock-jitter 0 --network-caching 200 --sout-mux-caching 2000 --sout-keep --rt-priority --no-color --no-interact --no-stats --no-reset-config --telnet-password admin --telnet-port 42124"
+    vlccmd = "vlc -I dummy -I telnet --clock-synchro 0 --clock-jitter 0 --network-caching 0 --sout-mux-caching 0 --sout-keep --rt-priority --no-color --no-interact --no-stats --no-reset-config --telnet-password admin --telnet-port 42121"
     # VLC spawn timeout
     # Adjust this if you get error 'Cannot spawn VLC!'
-    vlcspawntimeout = 15
+    vlcspawntimeout = 10
     # VLC host
     vlchost = '127.0.0.1'
     # VLC telnet interface port
-    vlcport = 42124
+    vlcport = 42121
     # VLC streaming port (you shouldn't set it in VLC itself)
     vlcoutport = 8081
     # VLC telnet interface password
@@ -149,7 +149,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     videoseekback = 0
     # Delay before closing Ace Stream connection when client disconnects
     # In seconds.
-    videodestroydelay = 3
+    videodestroydelay = 5
     # Pre-buffering timeout. In seconds.
     videotimeout = 70
     #
