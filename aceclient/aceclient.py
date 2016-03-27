@@ -302,7 +302,7 @@ class AceClient(object):
                     self._tempstatus = self._recvbuffer.split()[1].split(';')[0]
                     if self._tempstatus != self._status:
                         self._status = self._tempstatus
-                        logger.debug("STATUS changed to " + self._status)
+                        logger.debug("STATUS changed to {0} data {1}".format(self._status, repr(self._recvbuffer)))
 
                     if self._status == 'main:dl' or self._status == 'main:prebuf' or self._status == 'main:buf':
                         logger.debug("progress {1}% speed {5}kb/s peers {8}".format(*self._recvbuffer.split(';')))

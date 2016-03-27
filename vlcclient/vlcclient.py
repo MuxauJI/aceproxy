@@ -125,16 +125,23 @@ class VlcClient(object):
         # Get lock
         self._resultlock.acquire()
         # Write message to VLC socket
-        if brtype == True:
-            self._write(VlcMessage.request.startBroadcast(
-                stream_name, input, self._out_port, muxer, pre_access))
+
+        if brtype:
+            data = VlcMessage.request.startBroadcast(
+                stream_name, input, self._out_port, muxer, pre_access)
         else:
-            self._write(VlcMessage.request.stopBroadcast(stream_name))
+            data = VlcMessage.request.stopBroadcast(stream_name)
+
+        # Debug
+        logger.debug("Broadcast data {0}".format(data))
+
+        # Send
+        self._write(data)
 
         try:
             gevent.sleep()
             result = self._result.get(timeout=self._resulttimeout)
-            if result == False:
+            if not result:
                 logger.error(broadcast + " error")
                 raise VlcException(broadcast + " error")
         except gevent.Timeout:
@@ -143,7 +150,7 @@ class VlcClient(object):
         finally:
             self._resultlock.release()
 
-        if brtype == True:
+        if brtype:
             logger.debug("Broadcast started")
         else:
             logger.debug("Broadcast stopped")
