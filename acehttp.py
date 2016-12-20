@@ -110,7 +110,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     logger.debug("Client is not connected, terminating")
                     break
 
-                data = self.video.read(4096)
+                data = self.video.read(1024)
 
                 if data and self.clientconnected:
                     self.wfile.write(data)
@@ -178,7 +178,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 return
 
         self.nowhitespacespath = "".join(self.path.split())
-        logger.info("Accepted connection from " + self.clientip + " path " + self.nowhitespacespath)
+        logger.info("Accepted connection from " + self.clientip + " [" + self.headers.get('User-Agent') + "] path " + self.nowhitespacespath)
 
         try:
             self.splittedpath = self.nowhitespacespath.split('/')
@@ -347,7 +347,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                         self.vlcid, self.vlcprefix + self.url, AceConfig.vlcmux, AceConfig.vlcpreaccess)
                     # Sleep a bit, because sometimes VLC doesn't open port in
                     # time
-                    gevent.sleep(0.5)
+                    gevent.sleep(1.0)
 
             # Building new VLC url
             if AceConfig.vlcuse:

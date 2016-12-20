@@ -17,7 +17,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     acespawn = True
     # Ace Stream cmd line (use `--log-file filepath` to write log)
     # Autodetect for Windows
-    acecmd = "/usr/src/acestream_3.0.5.1_debian_7.4_x86_64/acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-cache-type memory --live-cache-size 102819600 --live-buffer 100 --upload-limit 5120 --download-limit 5120"
+    acecmd = "acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-cache-type memory --live-cache-size 102819600 --live-buffer 100 --upload-limit 5120 --download-limit 5120"
 
     # acecmd = "/usr/src/acestream_3.0.5.1_debian_7.4_x86_64/acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-buffer 10 --upload-limit 6000 --download-limit 6000"
 
