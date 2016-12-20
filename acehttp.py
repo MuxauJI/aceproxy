@@ -16,6 +16,7 @@ import glob
 import os
 import signal
 import sys
+import shutil
 import logging
 import psutil
 import BaseHTTPServer
@@ -235,6 +236,14 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "video/mpeg")
             self.end_headers()
+
+            fp = open("silence.mpeg", "rb")
+
+            shutil.copyfileobj(source, self.wfile)
+
+            fp.close()
+            fp = None
+
             self.closeConnection()
             return
 
