@@ -166,5 +166,6 @@ class AceConfig(acedefconfig.AceDefConfig):
     # before the headers sent.
     # We send them 200 OK and MPEG MIME-type right after connection has been initiated
     fakeheaderuas = ('HLS Client/2.0 (compatible; LG NetCast.TV-2012)',
+                     'Lavf/57.56.100',
                      'Mozilla/5.0 (DirectFB; Linux armv7l) AppleWebKit/534.26+ (KHTML, like Gecko) Version/5.0 Safari/534.26+ LG Browser/5.00.00(+mouse+3D+SCREEN+TUNER; LGE; 42LM670T-ZA; 04.41.03; 0x00000001;); LG NetCast.TV-2012 0'
                      )
