@@ -239,7 +239,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
             fp = open("silence.mpeg", "rb")
 
-            shutil.copyfileobj(source, self.wfile)
+            shutil.copyfileobj(fp, self.wfile)
 
             fp.close()
             fp = None
