@@ -114,6 +114,9 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                 data = self.video.read(1024)
 
                 if data and self.clientconnected:
+                    logger.info("Send %d bytes".format(len(data)))
+
+                    # Send
                     self.wfile.write(data)
                 else:
                     logger.warning("Video connection closed")
