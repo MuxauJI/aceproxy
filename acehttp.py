@@ -240,12 +240,12 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             self.send_header("Content-Type", "video/mpeg")
             self.end_headers()
 
-            fp = open("silence.mpeg", "rb")
+            # fp = open("silence.mpeg", "rb")
 
-            shutil.copyfileobj(fp, self.wfile)
+            # shutil.copyfileobj(fp, self.wfile)
 
-            fp.close()
-            fp = None
+            # fp.close()
+            # fp = None
 
             self.closeConnection()
             return

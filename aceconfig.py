@@ -160,7 +160,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     # to detect MIME-type or something before playing which Ace Stream handles badly.
     # We send them 200 OK and do nothing.
     # We add their User-Agents here
-    fakeuas = ('Mozilla/5.0 IMC plugin Macintosh', 'Lavf/57.56.100',)
+    fakeuas = ('Mozilla/5.0 IMC plugin Macintosh')
     #
     # Some video players have very short timeout and can disconnect from the proxy
     # before the headers sent.
