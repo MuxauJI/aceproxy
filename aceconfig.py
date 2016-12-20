@@ -17,7 +17,10 @@ class AceConfig(acedefconfig.AceDefConfig):
     acespawn = True
     # Ace Stream cmd line (use `--log-file filepath` to write log)
     # Autodetect for Windows
-    acecmd = "acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-cache-type memory --live-cache-size 102819600 --live-buffer 100"
+    acecmd = "/usr/src/acestream_3.0.5.1_debian_7.4_x86_64/acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-cache-type memory --live-cache-size 102819600 --live-buffer 100 --upload-limit 5120 --download-limit 5120"
+
+    # acecmd = "/usr/src/acestream_3.0.5.1_debian_7.4_x86_64/acestreamengine --client-console --port 41520 --api-port 62062 --http-port 41521 --https-port 41522 --live-buffer 10 --upload-limit 6000 --download-limit 6000"
+
     # Ace Stream API key
     # You probably shouldn't touch this
     acekey = 'n51LvQoTlJzNGaFxseRK-uvnvX-sD4Vm5Axwmc4UcoD-jruxmKsuJaH0eVgE'
@@ -98,7 +101,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     vlcspawn = True
     # VLC cmd line (use `--file-logging --logfile=filepath` to write log)
     # Please use the full path to executable for Windows, for example - C:\\Program Files\\VideoLAN\\VLC\\vlc.exe
-    vlccmd = "vlc -I dummy -I telnet --clock-synchro 0 --clock-jitter 0 --network-caching 0 --sout-mux-caching 0 --sout-keep --rt-priority --no-color --no-interact --no-stats --no-reset-config --telnet-password admin --telnet-port 42121"
+    vlccmd = "cvlc -I dummy -I telnet --clock-synchro 0 --clock-jitter 0 --network-caching 0 --sout-mux-caching 0 --sout-keep --rt-priority --no-color --no-interact --no-stats --no-reset-config --telnet-password admin --telnet-port 42121"
     # VLC spawn timeout
     # Adjust this if you get error 'Cannot spawn VLC!'
     vlcspawntimeout = 30
@@ -113,7 +116,7 @@ class AceConfig(acedefconfig.AceDefConfig):
     # Pre-access (HTTP) VLC parameters
     # You can add transcode options here
     # Something like #transcode{acodec=mpga,ab=128,channels=2,samplerate=44100}
-    vlcpreaccess = '#transcode{vcodec=mp4v}'
+    vlcpreaccess = ''
     # VLC muxer. You probably want one of these streamable muxers:
     # ts, asf, flv, ogg, mkv
     # You can use ffmpeg muxers too, if your VLC is built with it
